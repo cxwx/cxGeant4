@@ -69,7 +69,7 @@ target_link_libraries(cxg4_DumpParticle cxg4 ${LINK_LIBS})
 add_executable(cxg4_DumpPhysics cxg4_DumpPhysics.cpp)
 target_link_libraries(cxg4_DumpPhysics cxg4 ${LINK_LIBS})
 
-install(FILES ${headers} DESTINATION include/cxG4)
+install(FILES cxGeant4.hh DESTINATION include/cxfunc)
 install(
     TARGETS
         cxg4
