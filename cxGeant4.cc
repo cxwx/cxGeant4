@@ -104,11 +104,12 @@ auto GetValue(const std::string& a) -> double {  // convert like 1.0 m
 
 auto GetBoxXYZ(const G4LogicalVolume* a) -> std::tuple<double, double, double> {
   if (a == nullptr) {
+    spdlog::error("logic volume not exist @ GetBoxXYZ");
     return {-1, -1, -1};
   }
   auto* solid = dynamic_cast<G4Box*>(a->GetSolid());
   if (solid == nullptr) {
-    spdlog::error("Error: Volume {} not G4Box");
+    spdlog::error("Volume {} not G4Box", a->GetName());;
     return {-1, -1, -1};
   }
   auto x = solid->GetXHalfLength();
