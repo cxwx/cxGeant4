@@ -15,8 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install spdlog and yaml-cpp (default tap)
-        run: brew install spdlog yaml-cpp
+      - name: Install spdlog, yaml-cpp, and expat (default tap)
+        run: brew install spdlog yaml-cpp expat
 
       - name: Install Geant4 (cxwx/cxbrew tap)
         run: |
@@ -24,7 +24,7 @@ jobs:
           brew install cxwx/cxbrew/geant4
 
       - name: Configure CMake
-        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(brew --prefix expat)"
 
       - name: Build
         run: cmake --build build -j $(sysctl -n hw.ncpu)
