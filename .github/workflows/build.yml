@@ -1,0 +1,35 @@
+name: build
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build on macOS
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install spdlog and yaml-cpp (default tap)
+        run: brew install spdlog yaml-cpp
+
+      - name: Install Geant4 (cxwx/cxbrew tap)
+        run: |
+          brew tap cxwx/cxbrew
+          brew install cxwx/cxbrew/geant4
+
+      - name: Configure CMake
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build -j $(sysctl -n hw.ncpu)
+
+      - name: Smoke test
+        run: |
+          ./build/cxg4_DumpUnit
+          ./build/cxg4_materialprint G4_AIR
