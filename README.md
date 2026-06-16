@@ -1,5 +1,7 @@
 # cxg4
 
+[![build](https://github.com/cxwx/cxGeant4/actions/workflows/build.yml/badge.svg)](https://github.com/cxwx/cxGeant4/actions/workflows/build.yml)
+
 A small personal toolkit that makes [Geant4](https://geant4.web.cern.ch/)
 simulation setup less verbose: YAML-driven construction of materials,
 solids, logical volumes, and PMTs, plus a handful of inspection utilities.
